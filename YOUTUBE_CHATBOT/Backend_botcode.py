@@ -22,8 +22,12 @@ def chatbot(user_input,video_id):
 
     # YouTube Transcript
     video_id = f"{video_id}"
+    proxies = {
+    'http': 'http://103.127.252.57:3128',
+    'https': 'http://103.127.252.57:3128'
+    }
     try:
-        transcript_list = YouTubeTranscriptApi.get_transcript(video_id, languages=['hi', 'en'])
+        transcript_list = YouTubeTranscriptApi.get_transcript(video_id, languages=['hi', 'en'],proxies=proxies)
         transcript = " ".join(chunk['text'] for chunk in transcript_list)
         print(transcript)
     except TranscriptsDisabled:
